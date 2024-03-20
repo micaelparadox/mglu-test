@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-manager
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db-manager
+  template:
+    metadata:
+      labels:
+        app: db-manager
+    spec:
+      containers:
+      - name: db-manager
+        image: localhost:5000/db-manager:latest
+        ports:
+        - containerPort: 3001
+      imagePullSecrets:
+      - name: local-docker-registry-secret

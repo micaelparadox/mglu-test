@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+  api-gateway:
+    build:
+      context: ./api-gateway
+    ports:
+      - "3000:3000"
+
+  cli-tool:
+    build:
+      context: ./cli-tool
+    command: tail -f /dev/null
+
+  db-manager:
+    build:
+      context: ./db-manager
+    ports:
+      - "5001:5001"
+
+  dbaas-postgres-small:
+    image: localhost:5000/dbaas-postgres-small:latest
+    environment:
+      POSTGRES_DB: magalubanco
+      POSTGRES_USER: magusuario
+      POSTGRES_PASSWORD: mgluwordz
+    ports:
+      - "5432:5432"
